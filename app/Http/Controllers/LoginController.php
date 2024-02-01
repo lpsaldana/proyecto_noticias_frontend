@@ -18,17 +18,50 @@ class LoginController extends Controller
 
     public function verLogin()
     {
-        return view('login', ['nombre' => 'HOLA2']);
+        return view('login', ['msg' => '', 'base_url'=> $this->BASE_URL]);
     }
 
     public function login(Request $request)
     {
-        $name = $request->input('correo');
+        $correo = $request->input('correo');
+        $clave = $request->input('clave');
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('GET',$this->URL."/admin/noticias");
-        echo $response->getStatusCode();
-        echo $response->getBody();
-
-        //return view('login',['nombre'=>'HOLA2']);
+        try{
+            $response = $client->request('POST',$this->URL."/login",[
+                "json"=>[
+                    "correo"=> $correo,
+                    "clave"=> $clave
+                ]
+            ]);
+            $data = json_decode($response->getBody());
+            if($response->getStatusCode() == 200){
+                $_SESSION["user"] = $data->data;
+                return redirect('/test');
+                //print_r($data->data);
+            }else{
+                echo $data->msg;
+            }
+        }catch(\GuzzleHttp\Exception\ClientException $e){
+            if($e->hasResponse()){
+                $dataE = $e->getResponse();
+                $dataError = json_decode($dataE->getBody());
+                if(is_string($dataError->data)){
+                    return view('login', ['msg' => $dataError->data,'base_url'=>$this->BASE_URL]);
+                }else{
+                    $data = $dataError->data->errors; 
+                    $aux="";
+                    foreach ($data as $e) {
+                        $aux.= $aux.$e->msg."\n";
+                    }
+                    return view("login", ["msg"=> $aux,"base_url"=>$this->BASE_URL]);
+                }
+            }else{
+                return view("login", ["msg"=> $e->getMessage(),"base_url"=>$this->BASE_URL]);
+            }
+        }
+        
+    }
+    public function test(){
+        echo "hola";
     }
 }
