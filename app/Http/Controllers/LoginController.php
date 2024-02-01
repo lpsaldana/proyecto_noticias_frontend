@@ -61,4 +61,10 @@ class LoginController extends Controller
         }
         
     }
+
+    public function cerrar_sesion()
+    {
+        session_destroy();
+        return redirect('/');
+    }
 }

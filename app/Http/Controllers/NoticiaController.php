@@ -28,5 +28,18 @@ class NoticiaController extends Controller
         }
     }
 
+    public function noticias(Request $request)
+    {
+        $client = new \GuzzleHttp\Client();
+        $session = $_SESSION["user"];
+        try{
+            $response = $client->request('GET',$this->URL."/admin/noticias/user/".$session->external,['headers'=>['api-token'=> $session->token]]);
+            $data = json_decode($response->getBody());
+            return view('fragmentos/noticias', ['msg' => '', 'base_url'=> $this->BASE_URL,'noticias'=>$data->data]);
+        }catch(\GuzzleHttp\Exception\ClientException $e){
+            return view('fragmentos/noticias', ['msg' => '', 'base_url'=> $this->BASE_URL,'noticias'=>[]]);
+        }
+    }
+
     
 }
