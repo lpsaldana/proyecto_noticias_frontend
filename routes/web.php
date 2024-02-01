@@ -20,4 +20,5 @@
 
 $router->get('/', 'LoginController@verLogin');
 $router->post('/login', 'LoginController@login');
-$router->get('/test', 'LoginController@test');
+$router->get('/principal', 'NoticiaController@principal');
+

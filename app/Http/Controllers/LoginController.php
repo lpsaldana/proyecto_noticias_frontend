@@ -36,7 +36,7 @@ class LoginController extends Controller
             $data = json_decode($response->getBody());
             if($response->getStatusCode() == 200){
                 $_SESSION["user"] = $data->data;
-                return redirect('/test');
+                return redirect('/principal');
                 //print_r($data->data);
             }else{
                 echo $data->msg;
@@ -60,8 +60,5 @@ class LoginController extends Controller
             }
         }
         
-    }
-    public function test(){
-        echo "hola";
     }
 }
