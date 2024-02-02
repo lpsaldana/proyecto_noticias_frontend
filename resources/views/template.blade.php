@@ -97,7 +97,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="{{$base_url}}index.php/principal" class="nav-item nav-link">Home</a>
                     <a href="{{$base_url}}index.php/admin/noticias" class="nav-item nav-link">Noticias</a>
                     <a href="{{$base_url}}logout" class="nav-item nav-link">Cerrar Sesion</a>
                 </div>

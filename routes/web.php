@@ -23,3 +23,5 @@ $router->post('/login', 'LoginController@login');
 $router->get('/logout', 'LoginController@cerrar_sesion');
 $router->get('/principal', 'NoticiaController@principal');
 $router->get('/admin/noticias', 'NoticiaController@noticias');
+$router->get('/admin/noticias/nuevo', 'NoticiaController@view_guardar');
+$router->post('/admin/noticias/save', 'NoticiaController@guardar');

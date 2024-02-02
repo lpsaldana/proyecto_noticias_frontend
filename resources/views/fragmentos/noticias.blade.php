@@ -6,7 +6,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Administracion de noticia</h5>
                     <div class="container">
-                        <a href="#" class="btn btn-success col-2">Nuevo</a>
+                        <a href="{{$base_url}}index.php/admin/noticias/nuevo" class="btn btn-success col-2">Nuevo</a>
                         <table class="table">
                             <thead>
                                 <tr>
