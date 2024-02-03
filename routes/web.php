@@ -25,3 +25,5 @@ $router->get('/principal', 'NoticiaController@principal');
 $router->get('/admin/noticias', 'NoticiaController@noticias');
 $router->get('/admin/noticias/nuevo', 'NoticiaController@view_guardar');
 $router->post('/admin/noticias/save', 'NoticiaController@guardar');
+$router->get('/admin/noticias/modificar/{external}', 'NoticiaController@view_editar');
+$router->post('/admin/noticias/update', 'NoticiaController@modificar');
